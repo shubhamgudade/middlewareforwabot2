@@ -119,15 +119,22 @@ app.get("/gif", async (req, res) => {
         const gifUrl = gif.images?.downsized?.url || gif.images?.original?.url;
         if (!gifUrl) return res.status(404).json({ error: "No gif URL" });
 
-        const webpBuffer = await fetchAndConvert(gifUrl);
+        console.log(`[/gif] fetching: ${gifUrl}`);
+        let jpegBuffer;
+        try {
+            jpegBuffer = await fetchAndConvert(gifUrl);
+        } catch (convErr) {
+            console.error("[/gif] convert error:", convErr.message);
+            return res.status(500).json({ error: "Convert failed", detail: convErr.message });
+        }
         markSent(gif.id);
 
         res.set("Content-Type", "image/jpeg");
-        res.send(webpBuffer);
+        res.send(jpegBuffer);
 
     } catch (err) {
         console.error("[/gif]", err.message);
-        res.status(500).json({ error: "Failed to fetch gif" });
+        res.status(500).json({ error: "Failed to fetch gif", detail: err.message });
     }
 });
 
