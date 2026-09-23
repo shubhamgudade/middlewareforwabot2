@@ -45,13 +45,15 @@ async function deploy() {
         type: "web_service",
         name: "gif-middleware",
         ownerId,
+        serviceDetails: {
+            runtime: "node",
+            buildCommand: "npm install",
+            startCommand: "node server.js",
+            plan: "free",
+            envVars: []
+        },
         repo: REPO_URL,
-        branch: "main",
-        runtime: "node",
-        buildCommand: "npm install",
-        startCommand: "node server.js",
-        plan: "free",
-        envVars: []
+        branch: "main" 
     });
 
     const serviceId  = service.service?.id;
