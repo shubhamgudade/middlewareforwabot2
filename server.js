@@ -1,4 +1,4 @@
-import express from "express";
+Import express from "express";
 import fetch from "node-fetch";
 import sharp from "sharp";
 
@@ -14,11 +14,36 @@ app.use(express.json());
 
 const SEARCH_QUERIES = [
     "youtube thumbnail meme",
-    "instagram comments meme"
+    "instagram comments meme",
+    "W seed",
+    "Ishowspeed",
+    "Ishowmeat",
+    "Larp",
+    "Reaction images",
+    "Sigma",
+    "Ai slop",
+    "Niche",
+    "Slop",
+    "Youtube thumbnail",
+    "Uncanny",
+    "Tuff",
+    "67",
+    "Clash royale",
+    "Clash royale Uncanny",
+    "Quandale dingle",
+    "Kirk",
+    "Thumbnail",
+    "Miguel"
 ];
 
 // Giphy account IDs or usernames added via +gpacc
-const customAccounts = [];
+const customAccounts = [
+    "Naaayj",
+    "blahpla",
+    "Pera01",
+    "r_uhigo",
+    "linziegifs"
+];
 
 // circular history — tracks last 50 gif IDs sent
 const HISTORY_LIMIT = 50;
