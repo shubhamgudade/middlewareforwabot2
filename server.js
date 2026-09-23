@@ -1,6 +1,6 @@
 import express from "express";
 import fetch from "node-fetch";
-import sharp from "sharp";
+
 
 const app  = express();
 const PORT = process.env.PORT || 3000;
@@ -93,7 +93,7 @@ async function fetchAndConvert(gifUrl) {
         const buffer = Buffer.from(await res.arrayBuffer());
         // convert to WebP — good quality, small size
         return await sharp(buffer, { animated: false })
-            .webp({ quality: 75 })
+            .jpeg({ quality: 80 })
             .toBuffer();
     } finally {
         clearTimeout(timer);
@@ -122,7 +122,7 @@ app.get("/gif", async (req, res) => {
         const webpBuffer = await fetchAndConvert(gifUrl);
         markSent(gif.id);
 
-        res.set("Content-Type", "image/webp");
+        res.set("Content-Type", "image/jpeg");
         res.send(webpBuffer);
 
     } catch (err) {
